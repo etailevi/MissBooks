@@ -1,9 +1,10 @@
+const { useEffect, useState } = React
+
 import { BookFilter } from "../cmps/book-filter.jsx"
 import { BookList } from "../cmps/book-list.jsx"
 import { bookService } from "../services/book.service.js"
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 import { BookDetails } from "./book-details.jsx"
-
-const { useEffect, useState } = React
 
 export function BookIndex() {
 
@@ -17,13 +18,14 @@ export function BookIndex() {
 
     function loadBooks() {
         bookService.query(filterBy).then(books => setBooks(books))
-        // bookService.query().then(setBooks)
+        showSuccessMsg('Welcome to Miss Books shop!')
     }
 
     function onRemoveBook(bookId) {
         bookService.remove(bookId).then(() => {
             const updatedBooks = books.filter(book => book.id !== bookId)
             setBooks(updatedBooks)
+            showSuccessMsg(`Book (${bookId}) removed!`)
         })
     }
 

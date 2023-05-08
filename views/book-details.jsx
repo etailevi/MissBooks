@@ -2,7 +2,8 @@ const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
 
 import { LongTxt } from '../cmps/book-long-txt.jsx'
-import { bookService } from "../services/book.service.js"
+import { bookService } from '../services/book.service.js'
+import {AddReview} from '../cmps/add-review.jsx'
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
@@ -21,7 +22,6 @@ export function BookDetails() {
                 navigate('/book')
             })
     }
-    console.log('book', book)
 
     function onBack() {
         navigate('/book')
@@ -68,6 +68,7 @@ export function BookDetails() {
             <div><LongTxt txt={book.description} /></div>
             <h5>The book was published on: {book.publishedDate} ({checkPublishedDate(book.publishedDate)})</h5>
             <button onClick={onBack}>Back</button>
+            <div className="review"><AddReview book={book}/></div>
         </section>
     )
 

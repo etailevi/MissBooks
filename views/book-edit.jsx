@@ -9,7 +9,6 @@ export function BookEdit() {
     const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
     const navigate = useNavigate()
     const params = useParams()
-    console.log('params:', params)
 
     useEffect(() => {
         if (params.bookId) loadBook()
@@ -65,14 +64,14 @@ export function BookEdit() {
                 <label htmlFor="amount">List Price:</label>
                 <input onChange={handleChange} value={listPrice.amount} type="number" name="amount" id="amount" />
 
-                <label htmlFor="authors">Author:</label>
+                {/* <label htmlFor="authors">Author:</label>
                 <input value={authors} onChange={handleChange} name="authors" id="authors" type="text" />
 
                 <label htmlFor="language">Language:</label>
                 <input value={language} onChange={handleChange} name="language" id="language" type="text" />
 
                 <label htmlFor="pageCount">Page Count:</label>
-                <input value={pageCount} onChange={handleChange} name="pageCount" id="pageCount" type="number" />
+                <input value={pageCount} onChange={handleChange} name="pageCount" id="pageCount" type="number" /> */}
 
 
                 <button>{bookToEdit.id ? 'Save' : 'Add'}</button>

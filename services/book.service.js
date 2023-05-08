@@ -454,6 +454,8 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    addReview,
+    removeReview,
 }
 
 function query(filterBy = {}) {
@@ -464,17 +466,17 @@ function query(filterBy = {}) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 books = books.filter(book => regExp.test(book.title))
             }
-          
+
             if (filterBy.author) {
                 const regExp = new RegExp(filterBy.author, 'i')
                 books = books.filter(book => regExp.test(book.authors))
             }
-           
+
             if (filterBy.lang) {
                 const regExp = new RegExp(filterBy.lang, 'i')
                 books = books.filter(book => regExp.test(book.language))
             }
-       
+
             // if (filterBy.isOnSale) {
             //     books = books.filter(book => (book.listPrice.isOnSale))
             // }
@@ -509,7 +511,7 @@ function save(book) {
     }
 }
 
-function getEmptyBook(title = '', listPrice = '') {
+function getEmptyBook(title = '', listPrice = { amount: 0 }) {
     return { id: '', title, listPrice }
 }
 
@@ -527,8 +529,15 @@ function _createBooks() {
     }
 }
 
-function _createBook(title, listPrice = 20) {
-    const book = getEmptyBook(title, listPrice)
-    book.id = utilService.makeId()
-    return book
+function addReview(bookId, review) {
+    const book = get(bookId).then(book => {
+        if (!book.reviews) book.reviews = []
+        review.id = utilService.makeId()
+        book.reviews.push(review)
+    })
+    .then(save)
+}
+
+function removeReview(bookId, reviewId) {
+
 }
