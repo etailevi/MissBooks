@@ -44,3 +44,9 @@ object {
 .debug * {
   outline: 1px solid gold
 }
+
+a.active {
+  color: rgb(241, 212, 241);
+  font-weight: 600;
+  text-decoration: underline;
+}

@@ -2,7 +2,7 @@ const { useState } = React;
 
 export function LongTxt({ txt, length = 100 }) {
     const [isLong, setIsLong] = useState(false)
-    const [displayText, setDisplayText] = useState(txt.substring(0, length) + '...');
+    const [displayText, setDisplayText] = useState(txt.substring(0, length) + '...')
 
     function toggleTxtDisplay() {
         setIsLong(!isLong);
